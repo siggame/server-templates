@@ -1,5 +1,5 @@
 import game_objects
 import objects
 
-class ${capitalize(name)} (game_objects.Game):
+class Game(game_objects.Game):
     pass
