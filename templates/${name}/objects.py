@@ -1,5 +1,6 @@
 import game_objects
 from .game import Game
+from  util import command
 
 % for model in models:
 class ${model.name}(Game.Object):
@@ -8,6 +9,7 @@ class ${model.name}(Game.Object):
         )}
 
 %   for func in model.functions:
+    @command
     def ${func.name}(self\
 %     for arg in func.arguments:
 , ${arg.name} = None\
