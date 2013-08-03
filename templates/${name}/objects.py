@@ -8,12 +8,21 @@ class ${model.name}(Game.Object):
         )}
 
 %   for func in model.functions:
-  def ${func.name}(self\
+    def ${func.name}(self\
 %     for arg in func.arguments:
 , ${arg.name} = None\
 %     endfor
 ):
-    pass
+%     if model.parent and func in model.parent.functions:
+        ${model.parent.name}.${func.name}(self\
+%       for arg in func.arguments:
+, ${arg.name} = ${arg.name}\
+%       endfor
+)
+%     else:
+        pass
+%     endif
+
 %    endfor
 
 % endfor
