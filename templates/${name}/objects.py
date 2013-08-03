@@ -7,4 +7,13 @@ class ${model.name}(Game.Object):
         sorted([i.name for i in model.data])
         )}
 
+%   for func in model.functions:
+  def ${func.name}(self\
+%     for arg in func.arguments:
+, ${arg.name} = None\
+%     endfor
+):
+    pass
+%    endfor
+
 % endfor
