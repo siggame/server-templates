@@ -2,6 +2,10 @@ import game_objects
 import objects
 
 class Game(game_objects.Game):
+    _globals = ${repr(
+        [i.name for i in globals]
+        )}
+
     def before_start(self):
         #TODO: Initialize the game
 
