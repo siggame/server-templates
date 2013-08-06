@@ -2,6 +2,7 @@ import game_objects
 import objects
 
 class Game(game_objects.Game):
+    _name = ${repr(name)}
     _globals = ${repr(
         [i.name for i in globals]
         )}
@@ -13,7 +14,8 @@ class Game(game_objects.Game):
         #Initialize any global values
         #At this point Player objects exist
         #(But any game-specific values will be uninitialized)
-        pass
+        config = self.load_config('defaults')
+        self.game_length = config['globals']['game_length']
 
     def before_turn(self):
         #TODO: Initialize the turn
