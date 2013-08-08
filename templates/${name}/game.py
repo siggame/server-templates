@@ -3,6 +3,8 @@ import objects
 
 class Game(game_objects.Game):
     _name = ${repr(name)}
+    _game_version = ${version}
+    _server_version = 1
     _globals = ${repr(
         [i.name for i in globals]
         )}
