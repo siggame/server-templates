@@ -43,6 +43,6 @@ class Game(game_objects.Game):
     def check_winner(self):
         #TODO: Calculate if anyone has won and return the winner and reason
         if self.turn_number >= self.game_length:
-            return self.objects.players[0], 'won due to tie'
+            return self.players[0], 'won due to tie'
         else:
             return None, 'the battle continues'
