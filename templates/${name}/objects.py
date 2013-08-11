@@ -10,6 +10,11 @@ class ${model.name}(Game.Object):
 
 %   for func in model.functions:
     @command
+    @takes(\
+%     for num, arg in enumerate(func.arguments):
+${', ' if num else ''}${arg.name} = ${type_for(arg)}\
+%     endfor
+)
     def ${func.name}(self\
 %     for arg in func.arguments:
 , ${arg.name} = None\
