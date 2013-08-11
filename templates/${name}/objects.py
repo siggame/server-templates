@@ -1,6 +1,7 @@
 import game_objects
 from .game import Game
 from  util import command
+from game_utils import takes, success, failure
 
 % for model in models:
 class ${model.name}(Game.Object):
