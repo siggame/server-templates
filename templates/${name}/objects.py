@@ -9,6 +9,16 @@ class ${model.name}(Game.Object):
         [i.name for i in model.data]
         )}
 
+    def before_turn(self):
+        #TODO: Fill in start of turn values
+        #Common example would be giving units moves before their turn
+        pass
+
+    def after_turn(self):
+        #TODO: Set post-turn values
+        #Common example would be zeroing unit moves after the turn
+        pass
+
 %   for func in model.functions:
     @command
     @takes(\
