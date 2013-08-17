@@ -1,12 +1,15 @@
 import game_objects
 import objects
 
+<% locals = [i for i in globals if not isinstance(i.type, Model)] %>
+<% relations = [i for i in globals if isinstance(i.type, Model)] %>
+
 class Game(game_objects.Game):
     _name = ${repr(name)}
     _game_version = ${version}
     _server_version = 1
     _globals = ${repr(
-        [i.name for i in globals]
+        [i.name for i in locals] + [i.name  + '_id' for i in relations]
         )}
 
     def before_start(self):

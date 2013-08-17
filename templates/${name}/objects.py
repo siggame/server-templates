@@ -6,7 +6,7 @@ from game_utils import takes, success, failure
 % for model in models:
 class ${model.name}(Game.Object):
     game_state_attributes = ${repr(
-        [i.name for i in model.data]
+        [i.name for i in model.locals] + [i.name + '_id' for i in model.relations]
         )}
 
     def before_turn(self):
