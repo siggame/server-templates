@@ -5,13 +5,13 @@ from game_utils import takes, success, failure
 
 % for model in models:
 class ${model.name}(Game.Object):
-    game_state_attributes = ${repr(
+    _game_state_attributes = ${repr(
         [i.name for i in model.locals] + [i.name + '_id' for i in model.relations]
         )}
-    relations = ${repr(
+    _relations = ${repr(
         {i.name: i.type.name for i in model.relations}
         )}
-    remotes = ${repr(
+    _remotes = ${repr(
         {i.name: i.through for i in model.remotes}
         )}
 

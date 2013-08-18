@@ -1,9 +1,8 @@
 import game_objects
 import objects
-
-<% locals = [i for i in globals if not isinstance(i.type, Model)] %>
-<% relations = [i for i in globals if isinstance(i.type, Model)] %>
-
+<% locals = [i for i in globals if not i.through and not isinstance(i.type, Model)]
+relations = [i for i in globals if not i.through and isinstance(i.type, Model)]
+remotes = [i for i in globals if i.through] %>
 class Game(game_objects.Game):
     _name = ${repr(name)}
     _game_version = ${version}
@@ -13,6 +12,9 @@ class Game(game_objects.Game):
         )}
     _relations = ${repr(
         {i.name: i.type.name for i in relations}
+        )}
+    _remotes = ${repr(
+        {i.name: i.type.name for i in remotes}
         )}
 
     def before_start(self):
