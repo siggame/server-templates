@@ -11,6 +11,9 @@ class Game(game_objects.Game):
     _globals = ${repr(
         [i.name for i in locals] + [i.name  + '_id' for i in relations]
         )}
+    _relations = ${repr(
+        {i.name: i.type.name for i in relations}
+        )}
 
     def before_start(self):
         #TODO: Initialize the game

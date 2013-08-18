@@ -8,6 +8,12 @@ class ${model.name}(Game.Object):
     game_state_attributes = ${repr(
         [i.name for i in model.locals] + [i.name + '_id' for i in model.relations]
         )}
+    relations = ${repr(
+        {i.name: i.type.name for i in model.relations}
+        )}
+    remotes = ${repr(
+        {i.name: i.through for i in model.remotes}
+        )}
 
     def before_turn(self):
         #TODO: Fill in start of turn values
@@ -19,21 +25,6 @@ class ${model.name}(Game.Object):
         #Common example would be zeroing unit moves after the turn
         pass
 
-%   for relation in model.relations:
-    @property
-    def ${relation.name}(self):
-        return self.game.objects[self.${relation.name}_id]
-    @${relation.name}.setter
-    def ${relation.name}(self, new):
-        self.${relation.name}_id = new.id
-
-%   endfor
-%   for remote in model.remotes:
-    @property
-    def ${remote.name}(self):
-        return self.${remote.through}.${remote.name}
-
-%   endfor
 %   for func in model.functions:
     @command
     @takes(\
