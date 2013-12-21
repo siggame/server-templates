@@ -1,10 +1,19 @@
-import game_objects
-from .game import Game
+<%
+    rerun_for('model', models)
+%>import game_objects
+from ..game import Game
 from  util import command
 from game_utils import takes, success, failure
 
-% for model in models:
+% if model.parent:
+from .${model.parent.name} import ${model.parent.name}
+% endif
+
+% if model.parent:
+class ${model.name}(${model.parent.name}):
+% else:
 class ${model.name}(Game.Object):
+% endif
     _game_state_attributes = ${repr(
         [i.name for i in model.locals] + [i.name + '_id' for i in model.relations]
         )}
@@ -53,5 +62,3 @@ ${', ' if num else ''}${arg.name} = ${type_for(arg)}\
 %     endif
 
 %    endfor
-
-% endfor
