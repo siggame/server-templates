@@ -1,5 +1,6 @@
 import game_objects
 import objects
+from  util import command
 <% locals = [i for i in globals if not i.through and not isinstance(i.type, Model)]
 relations = [i for i in globals if not i.through and isinstance(i.type, Model)]
 remotes = [i for i in globals if i.through] %>
@@ -54,3 +55,19 @@ class Game(game_objects.Game):
             return self.players[0], 'won due to tie'
         else:
             return None, 'the battle continues'
+
+%   for func in functions:
+    @command
+    @takes(\
+%     for num, arg in enumerate(func.arguments):
+${', ' if num else ''}${arg.name} = ${type_for(arg)}\
+%     endfor
+)
+    def ${func.name}(self\
+%     for arg in func.arguments:
+, ${arg.name} = None\
+%     endfor
+):
+        pass
+
+%    endfor
